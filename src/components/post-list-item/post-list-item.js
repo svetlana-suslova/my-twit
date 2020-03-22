@@ -8,9 +8,9 @@ const PostListItem = ({label, important = false}) => {
     if (important) {
         classes +=' important';
     }
-    
+
     return (
-    <li className={classes}>
+    <div className={classes}>
         <span className="app-list-item-label">
             {label}
         </span>
@@ -27,7 +27,7 @@ const PostListItem = ({label, important = false}) => {
             </button>
             <i className="fa fa-heart"></i>
         </div>
-    </li>
+    </div>
     ) 
 }
 
