@@ -3,8 +3,21 @@ import React, {Component} from 'react';
 import './post-list-item.css';
 
 export default class PostListItem extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            important: false
+        };
+    }
+    onImportant = () => {
+        this.setState(({important}) => ({
+         important: !important
+        }))
+    }
+
     render() {
-        const {label, important = false} = this.props;
+        const {label} = this.props;
+        const {important} = this.state;
         let classes = 'app-list-item d-flex justify-content-between';
         
         if (important) {
@@ -20,7 +33,8 @@ export default class PostListItem extends Component {
                 <div className="d-flex justify-content-center align-items-center">
                     <button 
                         type="button"
-                        className="btn-star btn-sm">
+                        className="btn-star btn-sm"
+                        onClick={this.onImportant}>
                         <i className="fa fa-star"></i>
                     </button>
                     <button 
