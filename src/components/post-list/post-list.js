@@ -3,12 +3,12 @@ import PostListItem from '../post-list-item/post-list-item'
 
 import './post-list.css';
 
-const PostList = () => {
+const PostList = ({posts}) => {
     return (
     <ul className="app-list list-group">
-        <PostListItem label="Going to learn React." important/>
-        <PostListItem label="That is so good!"/>
-        <PostListItem label="No boredom during the quarantine..."/>
+        <PostListItem label={posts[0].label} important={posts[0].important}/>
+        <PostListItem label={posts[1].label} important={posts[1].important}/>
+        <PostListItem label={posts[2].label} important={posts[2].important}/>
     </ul>
     ) 
 }
