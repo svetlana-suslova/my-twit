@@ -8,7 +8,7 @@ const PostList = ({posts}) => {
     let elements = posts.map((item) => {
         return (
             <li className="list-group-item">
-               <PostListItem label={item.label} important={item.important}/>
+               <PostListItem {...item}/>
             </li>
         )
     });
