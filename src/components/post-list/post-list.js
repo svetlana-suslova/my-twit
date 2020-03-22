@@ -6,9 +6,10 @@ import './post-list.css';
 const PostList = ({posts}) => {
 
     let elements = posts.map((item) => {
+        const {id, ...itemProps} = item;
         return (
-            <li key={item.id} className="list-group-item">
-               <PostListItem {...item}/>
+            <li key={id} className="list-group-item">
+               <PostListItem {...itemProps}/>
             </li>
         )
     });
