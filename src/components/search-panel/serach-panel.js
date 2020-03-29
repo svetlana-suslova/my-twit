@@ -1,11 +1,11 @@
 import React from 'react';
-
+import { Input } from 'reactstrap';
 import './search-panel.sass';
 
 const SearchPanel = () => {
     return (
-    <input 
-        className="form-control search-input"
+    <Input 
+        className="search-input"
         type="text"
         placeholder="Search"
     />
