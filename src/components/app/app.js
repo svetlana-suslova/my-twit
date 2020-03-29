@@ -26,22 +26,8 @@ export default class App extends Component {
             return  typeof item === 'object' && !Array.isArray(item) && item != null;    
          });
          this.state.data = elements; 
-
     }
-
-    filteredData = () => {
-        this.setState( ({data}) => {
-            let elements = data.filter((item) => {
-                return  typeof item === 'object' && !Array.isArray(item) && item != null;    
-             });
-             return {
-                 data: elements
-             }
-        });
-    }
-
     deleteItem = (id) => {
-        this.filteredData();
         this.setState(({data}) => {
             const index = data.findIndex(elem => elem.id === id);
             const newArr = [...data.slice(0, index), ...data.slice(index + 1)];
