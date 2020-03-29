@@ -16,11 +16,17 @@ export default class App extends Component {
                 ['Going to learn React.', 'fhgj'],
                 'ttt',
                 null,
-                {label: 'Going to learn React.', important: true, id: 'fhgj'},
-                {label: 'That is so good!', important: false, id: 'aisl'},
-                {label: 'No boredom during the quarantine...', important: false, id: 'uiuij'}
+                {label: 'Going to learn React.', important: true, id: 1},
+                {label: 'That is so good!', important: false, id: 2},
+                {label: 'No boredom during the quarantine...', important: false, id: 3}
             ]
-        }
+        };
+        this.maxId = 4;
+        let elements = this.state.data.filter((item) => {
+            return  typeof item === 'object' && !Array.isArray(item) && item != null;    
+         });
+         this.state.data = elements; 
+
     }
 
     filteredData = () => {
@@ -32,7 +38,6 @@ export default class App extends Component {
                  data: elements
              }
         });
-        console.log(this.state.data);
     }
 
     deleteItem = (id) => {
@@ -45,6 +50,19 @@ export default class App extends Component {
             }
         });
     } 
+    addItem = (body) => {
+        const newItem = {
+            label: body,
+            important: false,
+            id: this.maxId++
+        }
+        this.setState(({data}) => {
+           const newArr = [...data, newItem];
+           return {
+               data: newArr
+           }
+       })
+    } 
        
     render() {
         return (
@@ -56,7 +74,8 @@ export default class App extends Component {
                 </div>
                 <PostList posts={this.state.data}
                 onDelete={this.deleteItem}/>
-                <PostAddForm/>
+                <PostAddForm
+                onAdd={this.addItem}/>
             </div>      
         )
     }    
