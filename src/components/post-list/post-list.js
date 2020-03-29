@@ -12,7 +12,7 @@ const PostList = ({posts}) => {
      elements = elements.map((item) => {
          const {id, ...itemProps} = item;
          return (
-             <li key={id} className="list-group-item">  {/*должен обязательно присутствовать уникальный id - иначе warning в консоли*/} 
+             <li key={id} className="list-group-item">
                  <PostListItem {...itemProps}/>
              </li>
          )
