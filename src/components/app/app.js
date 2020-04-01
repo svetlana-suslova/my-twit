@@ -20,7 +20,8 @@ export default class App extends Component {
                 {label: 'Going to learn React.', important: true, like: false, id: 1},
                 {label: 'That is so good!', important: false, like: false, id: 2},
                 {label: 'No boredom during the quarantine...', important: false, like: false, id: 3}
-            ]
+            ],
+            term: ''
         };
         this.maxId = 4;
         let elements = this.state.data.filter(item => typeof item === 'object' && !Array.isArray(item) && item != null);
@@ -69,22 +70,35 @@ export default class App extends Component {
                 data: newArr
             }
         })
+    }
+    searchPost = (items, term) => {
+        if (term.length === 0) {
+            return items
+        }
+        return items.filter ( (item) => {
+            return item.label.indexOf(term) > -1
+        });
+    }
+    onUpdateSearch = (term) => {
+        this.setState({term})
     } 
        
     render() {
-        const {data} = this.state; 
+        const {data, term} = this.state; 
         const liked = data.filter(item  => item.like).length;
         const allPosts = data.length;
+        const visiblePosts = this.searchPost(data, term);
         return (
             <div className="app">
                 <AppHeader
                 liked={liked}
                 allPosts={allPosts}/>
                 <div className="search-panel d-flex">
-                    <SearchPanel/>
+                    <SearchPanel
+                    onUpdateSearch={this.onUpdateSearch}/>
                     <PostStatusFilter/>
                 </div>
-                <PostList posts={this.state.data}
+                <PostList posts={visiblePosts}
                 onDelete={this.deleteItem}
                 onToogleImportant={this.onToogleImportant}
                 onToogleLiked={this.onToogleLiked}/>
