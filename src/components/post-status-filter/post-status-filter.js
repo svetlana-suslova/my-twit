@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Button } from 'reactstrap';
 import './post-status-filter.sass';
 
 export default class PostStatusFilter extends Component {
@@ -12,8 +11,15 @@ export default class PostStatusFilter extends Component {
     }
     render() {
         const buttons = this.buttons.map(({name, label}) => {
+            const {filter, onFilterSelect} = this.props;
+            const active = filter === name;
+            const activeClass = active ? 'btn-info' : 'btn-outline-secondary'
             return (
-                <Button key={name} color='info'>{label}</Button>
+                <button 
+                type="button" 
+                key={name} 
+                className={`btn ${activeClass}`}
+                onClick={() => onFilterSelect(name)}>{label}</button>
             )
         })
         return (
