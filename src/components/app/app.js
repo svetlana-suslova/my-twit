@@ -16,16 +16,15 @@ export default class App extends Component {
                 ['Going to learn React.', 'fhgj'],
                 'ttt',
                 null,
+                true,
                 {label: 'Going to learn React.', important: true, id: 1},
                 {label: 'That is so good!', important: false, id: 2},
                 {label: 'No boredom during the quarantine...', important: false, id: 3}
             ]
         };
         this.maxId = 4;
-        let elements = this.state.data.filter((item) => {
-            return  typeof item === 'object' && !Array.isArray(item) && item != null;    
-         });
-         this.state.data = elements; 
+        let elements = this.state.data.filter(item => typeof item === 'object' && !Array.isArray(item) && item != null);
+        this.state.data = elements; 
     }
     deleteItem = (id) => {
         this.setState(({data}) => {
