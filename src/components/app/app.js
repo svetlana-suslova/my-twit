@@ -28,6 +28,7 @@ export default class App extends Component {
         let elements = this.state.data.filter(item => typeof item === 'object' && !Array.isArray(item) && item != null);
         this.state.data = elements; 
     }
+
     deleteItem = (id) => {
         this.setState(({data}) => {
             const index = data.findIndex(elem => elem.id === id);
@@ -36,7 +37,8 @@ export default class App extends Component {
                 data: newArr
             }
         });
-    } 
+    }
+
     addItem = (body) => {
         const newItem = {
             label: body,
@@ -50,28 +52,27 @@ export default class App extends Component {
            }
        })
     }
+
+    onToogleOption = (id, option) => {  
+        this.setState(({data}) => {
+            const index = data.findIndex(elem => elem.id === id);
+            const old = data[index];
+            const newItem = {...old, [option]: !old[option]};
+            const newArr = [...data.slice(0, index), newItem, ...data.slice(index + 1)];
+            return {
+                data: newArr
+            }
+        })
+    }
+
     onToogleImportant = (id) => {
-        this.setState(({data}) => {
-            const index = data.findIndex(elem => elem.id === id);
-            const old = data[index];
-            const newItem = {...old, important: !old.important};
-            const newArr = [...data.slice(0, index), newItem, ...data.slice(index + 1)];
-            return {
-                data: newArr
-            }
-        })
+        this.onToogleOption(id, 'important');
     }
+
     onToogleLiked = (id) => {
-        this.setState(({data}) => {
-            const index = data.findIndex(elem => elem.id === id);
-            const old = data[index];
-            const newItem = {...old, like: !old.like};
-            const newArr = [...data.slice(0, index), newItem, ...data.slice(index + 1)];
-            return {
-                data: newArr
-            }
-        })
+        this.onToogleOption(id, 'like');
     }
+
     searchPost = (items, term) => {
         if (term.length === 0) {
             return items
@@ -80,6 +81,7 @@ export default class App extends Component {
             return item.label.indexOf(term) > -1
         });
     }
+
     filterPost = (items, filter) => {
         if (filter === 'like') {
             return items.filter(item => item.like)
@@ -87,9 +89,11 @@ export default class App extends Component {
             return items
         }    
     }
+
     onUpdateSearch = (term) => {
         this.setState({term})
-    } 
+    }
+     
     onFilterSelect = (filter) => {
         this.setState({filter})
     } 
