@@ -102,12 +102,18 @@ export default class App extends Component {
         const {data, term, filter} = this.state; 
         const liked = data.filter(item  => item.like).length;
         const allPosts = data.length;
+        let postsLabel = 'post';
+        if (allPosts > 1) {
+            postsLabel = 'posts';
+        }
         const visiblePosts = this.filterPost( this.searchPost(data, term), filter );
+        
         return (
             <div className="app">
                 <AppHeader
                 liked={liked}
-                allPosts={allPosts}/>
+                allPosts={allPosts} 
+                postsLabel={postsLabel}/>
                 <div className="search-panel d-flex">
                     <SearchPanel
                     onUpdateSearch={this.onUpdateSearch}/>
