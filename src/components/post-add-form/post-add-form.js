@@ -7,7 +7,6 @@ export default class PostAddForm extends Component {
         super(props);
         this.state = {
             text: ''
-
         }
     }
     onValueChange = (e) => {
@@ -16,11 +15,14 @@ export default class PostAddForm extends Component {
         })
     }
     onSubmit = (e) => {
+        const {text} = this.state;
         e.preventDefault();
-        this.props.onAdd(this.state.text);
+        if ( !(text.trim() === '') ) {
+            this.props.onAdd(text);  
+        }
         this.setState({
             text: ''
-        })
+        })  
     }
 
     render() {
