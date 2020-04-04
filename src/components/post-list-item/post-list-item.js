@@ -2,7 +2,7 @@ import React from 'react';
 
 import './post-list-item.sass';
 
-const PostListItem = ({label, onDelete, onToogleImportant, onToogleLiked, important, like}) => {
+const PostListItem = ({label, onDelete, onToogleImportant, onToogleLiked, important, like, date}) => {
     let classes = 'app-list-item d-flex justify-content-between';
     
     if (important) {
@@ -33,6 +33,12 @@ const PostListItem = ({label, onDelete, onToogleImportant, onToogleLiked, import
                     <i className="fa fa-trash-o"></i>
                 </button>
                 <i className="fa fa-heart"></i>
+                <span 
+                className="app-list-item-date">
+                {new Intl.DateTimeFormat('en-US', 
+                { hour: 'numeric', minute: 'numeric', hour12: false} )
+                .format(date)}
+                </span>
             </div>
             </div>
     )

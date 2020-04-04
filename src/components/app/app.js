@@ -17,9 +17,9 @@ export default class App extends Component {
                 'ttt',
                 null,
                 true,
-                {label: 'Going to learn React.', important: true, like: false, id: 1},
-                {label: 'That is so good!', important: false, like: false, id: 2},
-                {label: 'No boredom during the quarantine...', important: false, like: false, id: 3}
+                {label: 'Going to learn React.', important: true, like: false, id: 1, date: new Date()},
+                {label: 'That is so good!', important: false, like: false, id: 2, date: new Date()},
+                {label: 'No boredom during the quarantine...', important: false, like: false, id: 3, date: new Date()}
             ],
             term: '',
             filter: 'all'
@@ -43,7 +43,8 @@ export default class App extends Component {
         const newItem = {
             label: body,
             important: false,
-            id: this.maxId++
+            id: this.maxId++,
+            date: new Date()
         }
         this.setState(({data}) => {
            const newArr = [...data, newItem];
