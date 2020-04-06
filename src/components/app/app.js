@@ -17,9 +17,9 @@ export default class App extends Component {
                 'ttt',
                 null,
                 true,
-                {label: 'Going to learn React.', important: true, like: false, id: 1, date: new Date()},
-                {label: 'That is so good!', important: false, like: false, id: 2, date: new Date()},
-                {label: 'No boredom during the quarantine...', important: false, like: false, id: 3, date: new Date()}
+                {label: 'Going to learn React.', important: true, like: false, id: 1, date: new Date(), editForm: false},
+                {label: 'That is so good!', important: false, like: false, id: 2, date: new Date(), editForm: false},
+                {label: 'No boredom during the quarantine...', important: false, like: false, id: 3, date: new Date(), editForm: false}
             ],
             term: '',
             filter: 'all'
@@ -53,7 +53,30 @@ export default class App extends Component {
            }
        })
     }
+    editItem = (id, body) => {
+        this.setState(({data}) => {
+           const index = data.findIndex(elem => elem.id === id);
+           const old = data[index];
+           const editedItem = {...old, label: body};
+           const newArr = [...data.slice(0, index), editedItem, ...data.slice(index + 1)];;
+           return {
+               data: newArr
+           }
+       })
+    }
 
+    onToogleEdit = (id) => {
+        this.setState(({data}) => {
+            const index = data.findIndex(elem => elem.id === id);
+            const old = data[index];
+            const editedItem = {...old, editForm: !old.editForm};
+            const newArr = [...data.slice(0, index), editedItem, ...data.slice(index + 1)];;
+            return {
+                data: newArr
+            }
+        })
+    }
+    
     onToogleOption = (id, option) => {  
         this.setState(({data}) => {
             const index = data.findIndex(elem => elem.id === id);
@@ -125,7 +148,9 @@ export default class App extends Component {
                 <PostList posts={visiblePosts}
                 onDelete={this.deleteItem}
                 onToogleImportant={this.onToogleImportant}
-                onToogleLiked={this.onToogleLiked}/>
+                onToogleLiked={this.onToogleLiked}
+                onEdit={this.editItem}
+                onToogleEdit={this.onToogleEdit}/>
                 <PostAddForm
                 onAdd={this.addItem}/>
             </div>      
