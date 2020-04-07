@@ -64,18 +64,6 @@ export default class App extends Component {
            }
        })
     }
-
-    onToogleEdit = (id) => {
-        this.setState(({data}) => {
-            const index = data.findIndex(elem => elem.id === id);
-            const old = data[index];
-            const editedItem = {...old, editForm: !old.editForm};
-            const newArr = [...data.slice(0, index), editedItem, ...data.slice(index + 1)];;
-            return {
-                data: newArr
-            }
-        })
-    }
     
     onToogleOption = (id, option) => {  
         this.setState(({data}) => {
@@ -90,11 +78,15 @@ export default class App extends Component {
     }
 
     onToogleImportant = (id) => {
-        this.onToogleOption(id, 'important');
+        this.onToogleOption(id, 'important')
     }
 
     onToogleLiked = (id) => {
-        this.onToogleOption(id, 'like');
+        this.onToogleOption(id, 'like')
+    }
+
+    onToogleEdit = (id) => {
+        this.onToogleOption(id, 'editForm')
     }
 
     searchPost = (items, term) => {
@@ -103,7 +95,7 @@ export default class App extends Component {
         }
         return items.filter ( (item) => {
             return item.label.toLowerCase().indexOf(term) > -1
-        });
+        })
     }
 
     filterPost = (items, filter) => {

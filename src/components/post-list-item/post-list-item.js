@@ -23,15 +23,17 @@ export default class PostListItem extends Component  {
         }
         this.props.onToogleEdit();
     }
-    onCancel = () => {
+    onToogleOrCancelEdit = () => {
+        this.setState({
+            text: this.props.label
+        })
         this.props.onToogleEdit();
     }
       
     render() {
-        let {label, onDelete, onToogleImportant, 
-            onToogleLiked, important, like, date, onToogleEdit, editForm} = this.props;
-            let postsClasses = 'app-list-item d-flex justify-content-between';
-            let editFormClasses = 'bottom-panel';
+        let {label, onDelete, onToogleImportant, onToogleLiked, important, like, date, editForm} = this.props;
+        let postsClasses = 'app-list-item d-flex justify-content-between';
+        let editFormClasses = 'bottom-panel';
     
     if (important) {
         postsClasses +=' important';
@@ -64,7 +66,7 @@ export default class PostListItem extends Component  {
                         <button 
                             type="button"
                             className="btn-edit btn-sm"
-                            onClick={onToogleEdit}>
+                            onClick={this.onToogleOrCancelEdit}>
                             <i className="fa fa-edit"></i>
                         </button>
                         <button 
@@ -98,7 +100,7 @@ export default class PostListItem extends Component  {
                         <Button
                         type="button"
                         color="info"
-                        onClick={this.onCancel}>Cancel
+                        onClick={this.onToogleOrCancelEdit}>Cancel
                         </Button>
                     </div>
                 </Form>
