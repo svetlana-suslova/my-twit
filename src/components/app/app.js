@@ -85,8 +85,8 @@ export default class App extends Component {
         this.onToogleOption(id, 'like')
     }
 
-    onToogleEdit = (id) => {
-        this.onToogleOption(id, 'editForm')
+    onToogleOrCancelEdit = (id) => {
+        this.onToogleOption(id, 'editForm');
     }
 
     searchPost = (items, term) => {
@@ -142,7 +142,7 @@ export default class App extends Component {
                 onToogleImportant={this.onToogleImportant}
                 onToogleLiked={this.onToogleLiked}
                 onEdit={this.editItem}
-                onToogleEdit={this.onToogleEdit}/>
+                onToogleOrCancelEdit={this.onToogleOrCancelEdit}/>
                 <PostAddForm
                 onAdd={this.addItem}/>
             </div>      
