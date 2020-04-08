@@ -1,4 +1,5 @@
 import React from 'react';
+import ModalWindow from '../modal-window/modal-window'; 
 import './post-list-item.sass';
 
 const PostListItem = ({label, onDelete, onToogleImportant, onToogleLiked, important, like, date, onToogleOrCancelEdit}) =>  {
@@ -33,9 +34,8 @@ const PostListItem = ({label, onDelete, onToogleImportant, onToogleLiked, import
                     </button>
                     <button 
                         type="button"
-                        className="btn-trash btn-sm"
-                        onClick={onDelete}>
-                        <i className="fa fa-trash-o"></i>
+                        className="btn-trash btn-sm">
+                        <ModalWindow onDelete={onDelete}></ModalWindow>
                     </button>
                     <i className="fa fa-heart"></i>
                     <span 
@@ -45,7 +45,8 @@ const PostListItem = ({label, onDelete, onToogleImportant, onToogleLiked, import
                     .format(date)}
                     </span>
                 </div>
-            </div>    
+            </div>   
         )      
 }
+
 export default PostListItem;
